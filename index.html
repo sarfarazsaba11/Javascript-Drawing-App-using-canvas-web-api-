@@ -1,111 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advanced Drawing App - By Sharathchandar</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <script defer src="script.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Drawing App - By Sharathchandar</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <script defer src="script.js"></script>
+</head>
 
 <body>
 
-    <div class="container">
-        <section class="tools">
-            <div class="row">
-                <label class="tool">Tools</label>
-                <ul class="options">
-                    <li class="option">
-                        <input type="range" id=" sizeSlider" min="1" max="30" value="5" />
-                    </li>
-                    <li class="option active tool" id="pencil">
-                        <i class="fa fa-pencil" id="icon"></i>
-                        <span>Pencil</span>
-                    </li>
-                    <li class="option tool" id="brush">
-                        <i class="fa fa-paint-brush" id="icon"></i>
-                        <span>Brush</span>
-                    </li>
-                    <li class="option tool" id="eraser">
-                        <i class="fa fa-eraser" id="icon"></i>
-                        <span>Eraser</span>
-                    </li>
-                    <li class="option tool" id="undo">
-                        <i class="fa fa-undo"></i>
-                        <span>Undo</span>
-                    </li>
-                    <li class="option tool" id="redo">
-                        <i class="fa fa-redo"></i>
-                        <span>Redo</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="row shapes">
-                <label class="title"><strong>Shapes</strong>
-                    <input type="checkbox" id="fillColor" />
-                    <label for="fill-color">Fill Color</label>
+  <div class="container">
+    <section class="tools">
+      <div class="row">
+        <label class="tool">Tools</label>
+        <ul class="options">
+          <li class="option">
+            <input type="range" id=" sizeSlider" min="1" max="30" value="5" />
+          </li>
+          <li class="option active tool" id="pencil">
+            <i class="fa fa-pencil" id="icon"></i>
+            <span>Pencil</span>
+          </li>
+          <li class="option tool" id="brush">
+            <i class="fa fa-paint-brush" id="icon"></i>
+            <span>Brush</span>
+          </li>
+          <li class="option tool" id="eraser">
+            <i class="fa fa-eraser" id="icon"></i>
+            <span>Eraser</span>
+          </li>
+          <li class="option tool" id="undo">
+            <i class="fa fa-undo"></i>
+            <span>Undo</span>
+          </li>
+          <li class="option tool" id="redo">
+            <i class="fa fa-redo"></i>
+            <span>Redo</span>
+          </li>
+        </ul>
+      </div>
+      <div class="row shapes">
+        <label class="title"><strong>Shapes</strong>
+          <input type="checkbox" id="fillColor" />
+          <label for="fill-color">Fill Color</label>
 
-                </label>
-                <ul class="options">
-                   <li class="option tool" id="rectangle">
-              <i class="fa fa-square"></i>
-              <span>Rectangle</span>
-            </li>
-            <li class="option tool" id="circle">
-              <i class="fa fa-circle"></i>
-              <span>Circle</span>
-            </li>
-            <li class="option tool" id="triangle">
-              <i class="fa fa-mountain"></i>
-              <span>Triangle</span>
-            </li>
-            <li class="option tool" id="square">
-              <i class="fa fa-square"></i>
-              <span>Square</span>
-            </li>
-            <li class="option tool" id="hexagon">
-              <i class="fa-solid fa-cube"></i>
-              <span>Hexagon</span>
-            </li>
-            <li class="option tool" id="pentagon">
-              <i class="fa-solid fa-dice-d6"></i>
-              <span>Pentagon</span>
-            </li>
-            <li class="option tool" id="line">
-              <i class="fa-solid fa-grip-lines"></i>
-              <span>Line</span>
-            </li>
-            <li class="option tool" id="arrow">
-              <i class="fa-solid fa-arrow-up"></i>
-              <span>Arrow</span>
-            </li>
+        </label>
+        <ul class="options">
+          <li class="option tool" id="rectangle">
+            <i class="fa fa-square"></i>
+            <span>Rectangle</span>
+          </li>
+          <li class="option tool" id="circle">
+            <i class="fa fa-circle"></i>
+            <span>Circle</span>
+          </li>
+          <li class="option tool" id="triangle">
+            <i class="fa fa-mountain"></i>
+            <span>Triangle</span>
+          </li>
+          <li class="option tool" id="square">
+            <i class="fa fa-square"></i>
+            <span>Square</span>
+          </li>
+          <li class="option tool" id="hexagon">
+            <i class="fa-solid fa-cube"></i>
+            <span>Hexagon</span>
+          </li>
+          <li class="option tool" id="pentagon">
+            <i class="fa-solid fa-dice-d6"></i>
+            <span>Pentagon</span>
+          </li>
+          <li class="option tool" id="line">
+            <i class="fa-solid fa-grip-lines"></i>
+            <span>Line</span>
+          </li>
+          <li class="option tool" id="arrow">
+            <i class="fa-solid fa-arrow-up"></i>
+            <span>Arrow</span>
+          </li>
 
-                </ul>
+        </ul>
 
-            </div>
-             <div class="row colors">
-          <label class="title"><strong>Colors</strong></label>
-          <ul class="options">
-            <li class="option"></li>
-            <li class="option selected"></li>
-            <li class="option"></li>
-            <li class="option"></li>
-            <li class="option"></li>
-            <li class="option">
-              <input type="color" value="#00FF00" name="" id="colorPicker" />
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div class="row colors">
+        <label class="title"><strong>Colors</strong></label>
+        <ul class="options">
+          <li class="option"></li>
+          <li class="option selected"></li>
+          <li class="option"></li>
+          <li class="option"></li>
+          <li class="option"></li>
+          <li class="option">
+            <input type="color" value="#00FF00" name="" id="colorPicker" />
+          </li>
+        </ul>
+      </div>
 
-        </section>
+    </section>
+    <section class="drwaingArea">
+      <canvas>
 
-    </div>
-    |
+      </canvas>
+    </section>
+    <div class="buttons">
+        <button class="clearCanvas">
+          <i class="fa fa-times"></i>
+          Clear Canvas
+        </button>
+        <button class="saveImg">
+          <i class="fa fa-floppy-disk"></i> Save As Image
+        </button>
+      </div>
+
+  </div>
+  |
 </body>
 
 </html>
