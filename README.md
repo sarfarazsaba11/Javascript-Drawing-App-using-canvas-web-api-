@@ -24,4 +24,4 @@ This project was built while learning JavaScript and Canvas.
 
 ## Original Creator 
 - Sharathchandar K
--https://github.com/codehuntersharath
+- https://github.com/codehuntersharath
