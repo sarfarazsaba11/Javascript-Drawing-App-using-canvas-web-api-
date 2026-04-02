@@ -28,8 +28,6 @@ project-root/
 
 This project was built while learning JavaScript and Canvas.
 
-This project was built while learning JavaScript and Canvas.
-
 ## Original Creator 
 - Sharathchandar K
 - https://github.com/codehuntersharath
