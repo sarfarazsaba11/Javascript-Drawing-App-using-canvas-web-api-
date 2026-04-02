@@ -16,9 +16,11 @@ A simple drawing app built using JavaScript where users can draw on canvas.
 - Canvas API
 
 ## 📂 Project Structure
+project-root/
+│
 ├── index.html
 ├── style.css
-├── script.js
+└── script.js
 
 This project was built while learning JavaScript and Canvas.
 
