@@ -1,0 +1,196 @@
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Skranji", sans-serif;
+}
+
+body{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    min-height: 100vh;
+
+
+}
+
+.heading{
+    max-width: 100%;
+    margin:auto;
+    font-size: 50px;
+    color:rgb(50, 145, 209);
+    
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    gap:10px;
+    background-color: rgb(245, 245, 245);
+    padding:10px;
+    max-width:1200px;
+}
+
+section{
+    background-color: rgb(247, 245, 243);
+    border-radius: 5px;
+    border: 2px solid rgb(155, 204, 236);
+
+}
+
+
+.tools {
+ width:100%;
+ height:100px;
+ padding:10px;   
+ display:flex;
+ flex-direction: row;
+ justify-content: center;
+ gap:10px;
+
+  color: #4a98f7;
+
+}
+
+.tools .row{
+
+    border-right:2px solid rgb(50, 145, 209);
+    margin-right:0px;
+
+}
+
+.row .options .option {
+  cursor: pointer;
+}
+
+.tools .options{
+   list-style: none;
+   display:grid;
+   grid-template-columns:1fr 1fr 1fr;
+   gap:10px;
+    
+}
+
+
+.row .options .option {
+  cursor: pointer;
+}
+
+#sizeSlider {
+  width: 70px;
+}
+
+.tools .options li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.tools .shapes .options {
+  grid-template-columns: repeat(2, 1fr 1fr);
+  width: 100%;
+}
+
+.tools .shapes .title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.tools .colors {
+  border: none;
+}
+
+.colors .option {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-top: 3px;
+  position: relative;
+}
+
+.colors .option:nth-child(1) {
+  background-color: #fff;
+  border: 1px solid #f4f1f1;
+}
+
+.colors .option:nth-child(2) {
+  background-color: #dc1818;
+}
+
+.colors .option:nth-child(3) {
+  background-color: #e02020;
+}
+
+.colors .option:nth-child(4) {
+  background-color: #6dd400;
+}
+
+.colors .option:nth-child(5) {
+  background-color: #4a98f7;
+}
+
+.colors .option:nth-child(6) {
+  width: 50px;
+}
+
+.colors .option.selected::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  height: 12px;
+  width: 12px;
+  background: inherit;
+  border-radius: inherit;
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+}
+
+.colors .option:first-child.selected::before {
+  border-color: #ccc;
+
+}
+
+.option:is(:hover, .active) :where(span, label) {
+   color:rgb(177, 46, 16);
+}
+
+
+
+.drwaingArea{
+    min-height: 400px;
+}
+
+
+.buttons{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    gap:20px;
+   
+}
+
+.buttons .clearCanvas{
+    padding:5px;
+    border-radius: 10px;
+    border: 2px solid rgb(61, 139, 241);
+     width:10rem;
+}
+
+
+
+.buttons .saveImg{
+    padding:5px;
+    border-radius: 10px;
+    border: 2px solid rgb(61, 139, 241);
+    width:10rem;
+}
