@@ -10,3 +10,12 @@ const canvas = document.querySelector("canvas"),
 
 const undoButton = document.getElementById("undo");
 const redoButton = document.getElementById("redo");
+
+//global variabels wiht default values
+let prevMouseX,
+  prevMouseY,
+  snapshot,
+  isDrawing = false,
+  selectedTool = "pencil",
+  brushWidth = 5,
+  selectedColor = "#000";
