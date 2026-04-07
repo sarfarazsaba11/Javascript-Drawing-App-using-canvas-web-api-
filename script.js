@@ -48,11 +48,69 @@ toolBtns.forEach((btn) => {
 });
 
 
+const startDraw = (e) => {
+  console.log(e);
+  isDrawing= true;
+  prevMouseX = e.offsetX;
+  prevMouseY = e.offsetY;
+
+  ctx.beginPath();
+  ctx.lineWidth = brushWidth;
+  ctx.strokeStyle = selectedColor;
+  ctx.fillStyle = selectedColor;
+  snapshot = ctx.getImageData(0,0, canvas.width, canvas.height)
+}
+
 canvas.addEventListener("mousedown",startDraw);
 canvas.addEventListener("mousemove",drawing);
 canvas.addEventListener("mouseup",() => (isDrawing = false), saveState());
 
-const startDraw = (e) => {};
-const drawing = (e) => {};
+const drawPencil = (e) => {
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.shadowBlur = 0;
+  ctx.stroke();
+};
+
+const drawBrush = (e) => {
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.shadowColor = selectedColor;
+  ctx.shadowBlur = 15;
+  ctx.stroke();
+};
+
+const drawing = (e) => {
+  if(!isDrwaing) return ;
+
+  ctx.putImageData(snapshot, 0,0)
+  if((selectedTool === "pencil" && selectedTool === "brush") || selectedTool === "eraser"){
+    ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke()
+  }else if (selectedTool === "rectangle") {
+    drawRect(e);
+  } else if (selectedTool === "circle") {
+    drawCircle(e);
+  } else if (selectedTool === "triangle") {
+    drawTriangle(e);
+  } else if (selectedTool === "square") {
+    drawSquare(e);
+  } else if (selectedTool === "hexagon") {
+    drawHexagon(e);
+  } else if (selectedTool === "pentagon") {
+    drawPentagon(e);
+  } else if (selectedTool === "line") {
+    drawLine(e);
+  } else if (selectedTool === "arrow") {
+    drawArrow(e);
+  } else if (selectedTool === "curve") {
+    drawCurve(e);
+  } else if (selectedTool === "brush") {
+    drawBrush(e);
+  } else {
+    drawPencil(e);
+  }
+};
+
+};
 
 function saveState(){}
