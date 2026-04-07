@@ -65,6 +65,37 @@ canvas.addEventListener("mousedown",startDraw);
 canvas.addEventListener("mousemove",drawing);
 canvas.addEventListener("mouseup",() => (isDrawing = false), saveState());
 
+
+// Undo action
+undoButton.addEventListener("click", () => {
+  if (historyStep >= 0) {
+    historyStep--;
+    const img = new Image();
+    img.src = history[historyStep];
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+  }
+  if (historyStep == -1) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+});
+
+
+// Redo action
+redoButton.addEventListener("click", () => {
+  if (historyStep < history.length - 1) {
+    historyStep++;
+    const img = new Image();
+    img.src = history[historyStep];
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+  }
+});
+
 const drawPencil = (e) => {
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.shadowBlur = 0;
