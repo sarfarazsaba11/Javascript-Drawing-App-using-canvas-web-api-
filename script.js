@@ -8,6 +8,8 @@ const canvas = document.querySelector("canvas"),
   saveImage = document.querySelector(".saveImg"),
   ctx = canvas.getContext("2d");
 
+  console.log(canvas)
+
 const undoButton = document.getElementById("undo");
 const redoButton = document.getElementById("redo");
 
@@ -20,10 +22,15 @@ let prevMouseX,
   brushWidth = 5,
   selectedColor = "#000";
 
+let history = [],
+historyStep= -1;
+
 
 const setCanvasBackground = () => {
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  console.log("setcanvas",canvas.height, canvas.width)
   ctx.fillStyle = selectedColor;
 };
 
@@ -35,6 +42,7 @@ window.addEventListener("load", () => {
 
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
+   console.log("load",canvas.height, canvas.width)
   setCanvasBackground();
 });
 
@@ -60,10 +68,6 @@ const startDraw = (e) => {
   ctx.fillStyle = selectedColor;
   snapshot = ctx.getImageData(0,0, canvas.width, canvas.height)
 }
-
-canvas.addEventListener("mousedown",startDraw);
-canvas.addEventListener("mousemove",drawing);
-canvas.addEventListener("mouseup",() => (isDrawing = false), saveState());
 
 
 // Undo action
@@ -109,8 +113,56 @@ const drawBrush = (e) => {
   ctx.stroke();
 };
 
+const drawRect = () =>{
+  const width = prevMouseX - e.offsetX;
+  const height = prevMouseY - e.offsetY;
+  if(!fillColor.checked){
+    return ctx.strokeRect(e.offsetX,e.offsetY, width, height);
+
+  }
+
+  ctx.fillRect(e.offsetX, e.offsetY, width, height)
+
+}
+
+
+const drawCircle = (e) => {
+  ctx.beginPath();
+  let radius = Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2)+ Math.pow(prevMouseY- e.offestY,2));
+  ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
+  fillColor.checked ? ctx.fill() : ctx.stroke(); 
+}
+
+const drawTriangle = (e) => {
+  ctx.beginPath();
+  ctx.moveTo(prevMouseX, prevMouseY);
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.lineTo(prevMouseX * 2 - e.offsetX, e.offsetY);
+  ctx.closePath();
+  fillColor.checked ? ctx.fill() : ctx.stroke();
+};
+
+const drawSquare = (e) => {
+
+}
+
+const drawHexagon = (e) => {
+
+}
+
+const drawPentagon = (e) => {
+
+}
+const drawLine = (e) => {
+
+}
+
+const drawArrow = (e) => {
+
+}
+
 const drawing = (e) => {
-  if(!isDrwaing) return ;
+  if(!isDrawing) return ;
 
   ctx.putImageData(snapshot, 0,0)
   if((selectedTool === "pencil" && selectedTool === "brush") || selectedTool === "eraser"){
@@ -142,6 +194,17 @@ const drawing = (e) => {
   }
 };
 
-};
+canvas.addEventListener("mousedown",startDraw);
+canvas.addEventListener("mousemove",drawing);
+canvas.addEventListener("mouseup",() => (isDrawing = false), saveState());
 
-function saveState(){}
+
+
+function saveState() {
+  history = history.slice(0, historyStep + 1); // Remove states if we've undone
+  history.push(canvas.toDataURL());
+  historyStep++;
+
+
+  console.log(history)
+}
