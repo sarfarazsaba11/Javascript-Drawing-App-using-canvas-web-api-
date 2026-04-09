@@ -143,12 +143,24 @@ const drawTriangle = (e) => {
 };
 
 const drawSquare = (e) => {
-
-}
+  const sideLength = Math.abs(prevMouseX - e.offsetX);
+  ctx.beginPath();
+  ctx.rect(e.offsetX, e.offsetY, sideLength, sideLength);
+  fillColor.checked ? ctx.fill() : ctx.stroke();
+};
 
 const drawHexagon = (e) => {
-
-}
+  const sideLength = Math.abs(prevMouseX - e.offsetX);
+  ctx.beginPath();
+  for (let i = 0; i < 6; i++) {
+    const angle = ((2 * Math.PI) / 6) * i;
+    const x = e.offsetX + sideLength * Math.cos(angle);
+    const y = e.offsetY + sideLength * Math.sin(angle);
+    ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  fillColor.checked ? ctx.fill() : ctx.stroke();
+};
 
 const drawPentagon = (e) => {
 
