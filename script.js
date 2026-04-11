@@ -183,8 +183,27 @@ const drawLine = (e) => {
 };
 
 const drawArrow = (e) => {
+  const headLength = 15;
+  const angle = Math.atan2(e.offsetY - prevMouseY, e.offsetX - prevMouseX);
+  ctx.beginPath();
+  ctx.moveTo(prevMouseX, prevMouseY);
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
 
-}
+  // Draw arrowhead
+  ctx.beginPath();
+  ctx.moveTo(
+    e.offsetX - headLength * Math.cos(angle - Math.PI / 6),
+    e.offsetY - headLength * Math.sin(angle - Math.PI / 6)
+  );
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.lineTo(
+    e.offsetX - headLength * Math.cos(angle + Math.PI / 6),
+    e.offsetY - headLength * Math.sin(angle + Math.PI / 6)
+  );
+  ctx.closePath();
+  ctx.fill();
+};
 
 const drawing = (e) => {
   if(!isDrawing) return ;
