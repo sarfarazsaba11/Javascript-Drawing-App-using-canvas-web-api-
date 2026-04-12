@@ -205,6 +205,12 @@ const drawArrow = (e) => {
   ctx.fill();
 };
 
+
+
+
+
+
+
 const drawing = (e) => {
   if(!isDrawing) return ;
 
