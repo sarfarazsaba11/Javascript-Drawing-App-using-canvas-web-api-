@@ -55,6 +55,8 @@ toolBtns.forEach((btn) => {
   });
 });
 
+sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
+
 
 const startDraw = (e) => {
   console.log(e);
