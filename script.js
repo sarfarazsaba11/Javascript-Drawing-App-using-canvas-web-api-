@@ -57,6 +57,20 @@ toolBtns.forEach((btn) => {
 
 sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 
+colorBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".options .selected").classList.remove("selected");
+    btn.classList.add("selected");
+    selectedColor = window
+      .getComputedStyle(btn)
+      .getPropertyValue("background-color");
+  });
+});
+
+colorPicker.addEventListener("change", () => {
+  colorPicker.parentElement.style.background = colorPicker.value;
+  colorPicker.parentElement.click();
+});
 
 const startDraw = (e) => {
   console.log(e);
