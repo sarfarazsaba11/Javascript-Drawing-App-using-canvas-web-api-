@@ -44,6 +44,12 @@ section{
 
 }
 
+canvas {
+  width: 100%;
+  height: 400px; /* or 100% if inside a sized container */
+  display: block; /* removes inline spacing */
+}
+
 
 .tools {
  width:100%;

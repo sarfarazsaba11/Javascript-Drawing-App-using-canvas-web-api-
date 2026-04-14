@@ -9,6 +9,7 @@ const canvas = document.querySelector("canvas"),
   ctx = canvas.getContext("2d");
 
   console.log(canvas)
+  console.log(sizeSlider)
 
 const undoButton = document.getElementById("undo");
 const redoButton = document.getElementById("redo");
@@ -45,89 +46,6 @@ window.addEventListener("load", () => {
    console.log("load",canvas.height, canvas.width)
   setCanvasBackground();
 });
-
-toolBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelector(".options .active").classList.remove("active");
-    btn.classList.add("active");
-    selectedTool = btn.id;
-    console.log(selectedTool);
-  });
-});
-
-sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
-
-colorBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelector(".options .selected").classList.remove("selected");
-    btn.classList.add("selected");
-    selectedColor = window
-      .getComputedStyle(btn)
-      .getPropertyValue("background-color");
-  });
-});
-
-colorPicker.addEventListener("change", () => {
-  colorPicker.parentElement.style.background = colorPicker.value;
-  colorPicker.parentElement.click();
-});
-
-const startDraw = (e) => {
-  console.log(e);
-  isDrawing= true;
-  prevMouseX = e.offsetX;
-  prevMouseY = e.offsetY;
-
-  ctx.beginPath();
-  ctx.lineWidth = brushWidth;
-  ctx.strokeStyle = selectedColor;
-  ctx.fillStyle = selectedColor;
-  snapshot = ctx.getImageData(0,0, canvas.width, canvas.height)
-}
-
-
-// Undo action
-undoButton.addEventListener("click", () => {
-  if (historyStep >= 0) {
-    historyStep--;
-    const img = new Image();
-    img.src = history[historyStep];
-    img.onload = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
-    };
-  }
-  if (historyStep == -1) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-});
-
-
-// Redo action
-redoButton.addEventListener("click", () => {
-  if (historyStep < history.length - 1) {
-    historyStep++;
-    const img = new Image();
-    img.src = history[historyStep];
-    img.onload = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
-    };
-  }
-});
-
-const drawPencil = (e) => {
-  ctx.lineTo(e.offsetX, e.offsetY);
-  ctx.shadowBlur = 0;
-  ctx.stroke();
-};
-
-const drawBrush = (e) => {
-  ctx.lineTo(e.offsetX, e.offsetY);
-  ctx.shadowColor = selectedColor;
-  ctx.shadowBlur = 15;
-  ctx.stroke();
-};
 
 const drawRect = () =>{
   const width = prevMouseX - e.offsetX;
@@ -221,16 +139,38 @@ const drawArrow = (e) => {
   ctx.fill();
 };
 
+const startDraw = (e) => {
+  console.log(e,"start draw");
+  isDrawing= true;
+  prevMouseX = e.offsetX;
+  prevMouseY = e.offsetY;
 
+  ctx.beginPath();
+  ctx.lineWidth = brushWidth;
+  ctx.strokeStyle = selectedColor;
+  ctx.fillStyle = selectedColor;
+  snapshot = ctx.getImageData(0,0, canvas.width, canvas.height)
+}
 
+const drawPencil = (e) => {
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.shadowBlur = 0;
+  ctx.stroke();
+  console.log("pencil function")
+};
 
-
-
+const drawBrush = (e) => {
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.shadowColor = selectedColor;
+  ctx.shadowBlur = 15;
+  ctx.stroke();
+};
 
 const drawing = (e) => {
   if(!isDrawing) return ;
 
-  ctx.putImageData(snapshot, 0,0)
+  ctx.putImageData(snapshot, 0,0);
+
   if((selectedTool === "pencil" && selectedTool === "brush") || selectedTool === "eraser"){
     ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
     ctx.lineTo(e.offsetX, e.offsetY);
@@ -259,6 +199,65 @@ const drawing = (e) => {
     drawPencil(e);
   }
 };
+
+toolBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".options .active").classList.remove("active");
+    btn.classList.add("active");
+    selectedTool = btn.id;
+    console.log(selectedTool);
+  });
+});
+
+sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
+
+// colorBtns.forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     document.querySelector(".options .selected").classList.remove("selected");
+//     btn.classList.add("selected");
+//     selectedColor = window
+//       .getComputedStyle(btn)
+//       .getPropertyValue("background-color");
+//   });
+// });
+
+// colorPicker.addEventListener("change", () => {
+//   colorPicker.parentElement.style.background = colorPicker.value;
+//   colorPicker.parentElement.click();
+// });
+
+
+
+// Undo action
+undoButton.addEventListener("click", () => {
+  if (historyStep >= 0) {
+    historyStep--;
+    const img = new Image();
+    img.src = history[historyStep];
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+  }
+  if (historyStep == -1) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+});
+
+
+// Redo action
+redoButton.addEventListener("click", () => {
+  if (historyStep < history.length - 1) {
+    historyStep++;
+    const img = new Image();
+    img.src = history[historyStep];
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+  }
+});
+
 
 canvas.addEventListener("mousedown",startDraw);
 canvas.addEventListener("mousemove",drawing);
